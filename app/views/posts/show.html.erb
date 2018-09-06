@@ -1,6 +1,9 @@
 <h2><%= @post.title %></h2>
 <!-- simple_formatで改行を反映させる -->
+<p>作者: <%= @post.author %></p>
 <p><%= simple_format @post.body %></p>
+<p>作成日: <%= @post.created_at %></p>
+<p>最終更新日: <%= @post.updated_at %></p>
 
 <!--comment欄  -->
 <h3>コメント欄</h3>

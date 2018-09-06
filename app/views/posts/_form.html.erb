@@ -9,6 +9,15 @@
         おそらく、モデルが増えてくるとたくさん記述する必要が出てくる -->
 <!-- どっちも対応の場合 -->
 <%= form_for @post do |f| %>
+<!-- 記事入力 -->
+    <p>
+        <%= f.text_field :author, placeholder: 'your name' %>
+    </p>
+    <% if @post.errors.messages[:author].any? %>
+        <span class="error"><%= @post.errors.messages[:author][0] %></span>
+    <% end %>
+    <p>
+
 <!-- title入力 -->
     <!-- @postは新規追加のデータが入っている -->
     <!-- つまりrender plain @post.errors.inspectで出たやつ -->
@@ -28,6 +37,15 @@
         <span class="error"><%= @post.errors.messages[:body][0] %></span>
     <% end %>
     <p>
+<!-- パスワード入力 -->
+    <p>
+        <%= f.password_field :password, placeholder: 'enter password' %>
+    </p>
+    <% if @post.errors.messages[:password].any? %>
+        <span class="error"><%= @post.errors.messages[:password][0] %></span>
+    <% end %>
+    <p>
+
 <!-- submit -->
         <%= f.submit '作成', class: 'submit' %>
     </p>

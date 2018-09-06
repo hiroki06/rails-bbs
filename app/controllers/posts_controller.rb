@@ -33,6 +33,7 @@ class PostsController < ApplicationController
 
     def destroy
         @post = Post.find(params[:id])
+        # if @post.id == params[:password]
         @post.destroy
         # 削除された画面を反映させる
         redirect_to posts_path
@@ -61,7 +62,8 @@ class PostsController < ApplicationController
             # render plain: @post.errors.inspect
 
             # newと同じviewに表示する
-            render 'new'
+            @posts = Post.all.order(created_at: 'desc')
+            render 'index'
         end
     end
 
@@ -72,6 +74,6 @@ class PostsController < ApplicationController
             #2.paramsの中の:postというモデルオブジェクトから来るデータを参照する
             #   requrireで引数に設定したキーの値だけ取得できる
             #3.permitは許可したいものだけを書く。
-            params.require(:post).permit(:title,:body)
+            params.require(:post).permit(:author,:title,:body,:password)
         end
 end

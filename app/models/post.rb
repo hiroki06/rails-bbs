@@ -5,6 +5,8 @@ class Post < ApplicationRecord
     has_many :comments,dependent: :destroy
     # @post.commentsで引っ張ってこれる
     # messageがある場合、presenceはtureと書かなくてもerror検出する
+    validates :author, presence: {message: '名前を入力してください'} , length: {minimum: 4, maxmaum: 10, message: '4文字以上、10文字以内で入力してください'}
     validates :title, presence: {message: 'タイトルを入力してください'} , length: {minimum: 3,message: '3文字以上入力してください'}
     validates :body, presence: {message: '内容を入力してください'}
+    validates :password, presence: {message: 'パスワードを入力してください'} , length: {minimum: 4, maxmaum: 10, message: '4文字以上、10文字以内で入力してください'}
 end

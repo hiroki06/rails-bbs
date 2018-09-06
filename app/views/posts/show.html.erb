@@ -1,0 +1,36 @@
+<h2><%= @post.title %></h2>
+<!-- simple_formatで改行を反映させる -->
+<p><%= simple_format @post.body %></p>
+
+<!--comment欄  -->
+<h3>コメント欄</h3>
+    <% if @post.comments.any? %>
+        <ul>
+            <% @post.comments.each do |comment| %>
+            <li>
+                <%= comment.body %>
+                <%= link_to '[x]',
+                    # 上の@postとcommentを渡す。routesで必要な引数の確認をする
+                    post_comment_path(@post.id,comment),
+                    # deleteと明示的にするために必要
+                    method: :delete,
+                    class: 'command',
+                    # 確認ダイアログ
+                    data: {confirm: '削除しますか?'}
+                %>
+               </li>
+            <% end %>
+        </ul>
+    <% end %>
+    <!-- 複数のモデルを渡す場合は、配列かつ、カッコで括る
+    build モデルオブジェクトの生成(saveやdestroyが使える) -->
+<%= form_for([@post, @post.comments.build]) do |f| %>
+<!-- コメント入力 -->
+    <p>
+        <%= f.text_area :body,class: 'comment_body' %>
+    </p>
+<!-- submit -->
+    <p>
+        <%= f.submit 'コメント投稿',class: 'submit' %>
+    </p>
+<% end %>

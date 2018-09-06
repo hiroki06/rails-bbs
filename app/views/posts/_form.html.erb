@@ -1,0 +1,34 @@
+<!-- partialの練習 -->
+
+<!-- editの場合 -->
+    <!-- form_for @post, url: post_path(@post) do |f| -->
+    <!-- formのパスに注意するupdateなので'post_pathになる' -->
+<!-- newの場合 -->
+    <!-- form_for :post, url: posts_path do |f| -->
+    <!-- form_forとform_withがある :postはモデルオブジェクトのこと。つまりpostモデルに対するformだと言う意味
+        おそらく、モデルが増えてくるとたくさん記述する必要が出てくる -->
+<!-- どっちも対応の場合 -->
+<%= form_for @post do |f| %>
+<!-- title入力 -->
+    <!-- @postは新規追加のデータが入っている -->
+    <!-- つまりrender plain @post.errors.inspectで出たやつ -->
+    <!-- any?: モデルが空ならtrueを返す -->
+    <p>
+        <%= f.text_field :title, placeholder: 'enter title' %>
+    </p>
+    <% if @post.errors.messages[:title].any? %>
+        <span class="error"><%= @post.errors.messages[:title][0] %></span>
+    <% end %>
+
+<!-- 記事入力 -->
+    <p>
+        <%= f.text_area :body, placeholder: 'enter content' %>
+    </p>
+    <% if @post.errors.messages[:body].any? %>
+        <span class="error"><%= @post.errors.messages[:body][0] %></span>
+    <% end %>
+    <p>
+<!-- submit -->
+        <%= f.submit '作成', class: 'submit' %>
+    </p>
+<% end %>

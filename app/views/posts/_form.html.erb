@@ -10,8 +10,10 @@
 <!-- どっちも対応の場合 -->
 <%= form_for @post do |f| %>
 <!-- 記事入力 -->
+
     <p>
-        <%= f.text_field :author, placeholder: 'your name' %>
+        <span>名前</span>
+        <%= f.text_field :author, placeholder: '省略可' %>
     </p>
     <% if @post.errors.messages[:author].any? %>
         <span class="error"><%= @post.errors.messages[:author][0] %></span>
@@ -22,8 +24,10 @@
     <!-- @postは新規追加のデータが入っている -->
     <!-- つまりrender plain @post.errors.inspectで出たやつ -->
     <!-- any?: モデルが空ならtrueを返す -->
+    
     <p>
-        <%= f.text_field :title, placeholder: 'enter title' %>
+        <span>タイトル</span>
+        <%= f.text_field :title, placeholder: '3文字以上' %>
     </p>
     <% if @post.errors.messages[:title].any? %>
         <span class="error"><%= @post.errors.messages[:title][0] %></span>
@@ -31,7 +35,8 @@
 
 <!-- 記事入力 -->
     <p>
-        <%= f.text_area :body, placeholder: 'enter content' %>
+        <span>内容</span>
+        <%= f.text_area :body, placeholder: '内容欄' %>
     </p>
     <% if @post.errors.messages[:body].any? %>
         <span class="error"><%= @post.errors.messages[:body][0] %></span>
@@ -39,7 +44,8 @@
     <p>
 <!-- パスワード入力 -->
     <p>
-        <%= f.password_field :password, placeholder: 'enter password' %>
+        <span>パスワード</span>
+        <%= f.password_field :password, placeholder: 'パスワード欄' %>
     </p>
     <% if @post.errors.messages[:password].any? %>
         <span class="error"><%= @post.errors.messages[:password][0] %></span>
@@ -47,9 +53,9 @@
     <p>
 
 <!-- submit -->
-    <% unless @post.id.nil? %>
-        <%= f.submit '削除', class: 'delete',name: "delete" %>
-    <% end %>
         <%= f.submit '作成', class: 'submit' %>
+    <% unless @post.id.nil? %>
+        <%= f.submit '削除', class: 'delete',name: "delete",data: { confirm: "本当に削除しますか？"} %>
+    <% end %>
     </p>
 <% end %>

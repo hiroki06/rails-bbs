@@ -8,5 +8,5 @@ class Post < ApplicationRecord
     validates :author,  length: {maximum: 10, message: '10文字以内で入力してください'}
     validates :title, presence: {message: 'タイトルを入力してください'} , length: {minimum: 3,message: '3文字以上入力してください'}
     validates :body, presence: {message: '内容を入力してください'}
-    validates :password, presence: {message: 'パスワードを入力してください'} , length: {minimum: 4, maximum: 10, message: '4文字以上、10文字以内で入力してください'}
+    validates :password, presence: {message: 'パスワードを入力してください'} #, length: {minimum: 4, maximum: 10, message: '4文字以上、10文字以内で入力してください'}
 end

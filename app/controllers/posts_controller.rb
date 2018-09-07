@@ -1,3 +1,5 @@
+require "digest/md5"
+
 class PostsController < ApplicationController
     # actionのこと(rails routesででてくるgetしたときの関数)
     def index
@@ -57,6 +59,8 @@ class PostsController < ApplicationController
         if @post.author.empty?
             @post.author = "名無しさん"
         end
+        # hash化
+        @post[:password] = to_md5(@post[:password])
         if @post.save
         # redirect ここでは記事一覧にリダイレクトするprefixが使える
             redirect_to posts_path
@@ -79,4 +83,9 @@ class PostsController < ApplicationController
             #3.permitは許可したいものだけを書く。
             params.require(:post).permit(:author,:title,:body,:password)
         end
+
+# 便利な関数
+    def to_md5(str)
+        Digest::MD5.hexdigest(str)
+    end
 end

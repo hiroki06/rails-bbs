@@ -54,6 +54,9 @@ class PostsController < ApplicationController
         # storong parameterを使用する
         @post = Post.new(post_params)
         # validationに失敗した時はfalseが返ってくる
+        if @post.author.empty?
+            @post.author = "名無しさん"
+        end
         if @post.save
         # redirect ここでは記事一覧にリダイレクトするprefixが使える
             redirect_to posts_path

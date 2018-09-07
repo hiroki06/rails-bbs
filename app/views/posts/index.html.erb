@@ -3,16 +3,8 @@
     <% @posts.each do |post| %>
     <!-- urlはrails routesで見たときのprefix+'_path'を書く(ちなみにpost.idはpostでもよい) -->
         <li>
-            <%= link_to post.title,post_path(post.id) %>
-            <%= link_to '[x]',
-                post_path(post.id),
-                # deleteと明示的にするために必要
-                method: :delete,
-                class: 'command',
-                # 確認ダイアログ
-                data: {confirm: '削除しますか?'}
-
-             %>
+            <%= link_to "#{post.updated_at.in_time_zone('Tokyo')
+.strftime('%Y/%m/%d %H:%M')} #{post.title}",post_path(post.id) %>
             <%= link_to '[編集]',edit_post_path(post.id), class: 'command' %>
         </li>
     <% end %>

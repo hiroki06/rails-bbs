@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
     # actionのこと(rails routesででてくるgetしたときの関数)
     def index
-        @posts = Post.all.order(created_at: 'desc')
+        @posts = Post.all.order(updated_at: 'desc')
         @post = Post.new
     end
 
@@ -65,7 +65,7 @@ class PostsController < ApplicationController
             # render plain: @post.errors.inspect
 
             # newと同じviewに表示する
-            @posts = Post.all.order(created_at: 'desc')
+            @posts = Post.all.order(updated_at: 'desc')
             render 'index'
         end
     end

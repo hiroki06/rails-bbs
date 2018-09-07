@@ -1,13 +1,11 @@
 <h2>新着トピック</h2>
-
 <ul>
     <% @posts.each do |post| %>
     <!-- urlはrails routesで見たときのprefix+'_path'を書く(ちなみにpost.idはpostでもよい) -->
-        <li>
-            <%= link_to "#{post.updated_at.in_time_zone('Tokyo')
-.strftime('%Y/%m/%d %H:%M')} #{post.title}",post_path(post.id) %>
-            <%= link_to '[編集]',edit_post_path(post.id), class: 'command' %>
-        </li>
+    <li>
+        <%= link_to "#{post.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M')} #{post.title}",post_path(post.id) %>
+        <%= link_to '[編集]',edit_post_path(post.id), class: 'command' %>
+    </li>
     <% end %>
 </ul>
 <%= render "new" %>

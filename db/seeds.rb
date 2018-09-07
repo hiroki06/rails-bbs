@@ -5,7 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require "digest/md5"
 
 5.times do |i|
-    Post.create(title: "title#{i}",body: "body#{i}", password:"#{i}",author: "#{i}")
+    Post.create(title: "はじめまして#{i}です！",body: "趣味は#{i}つあります。", password:"#{Digest::MD5.hexdigest(i.to_s)}",author: "#{i}さん")
 end

@@ -11,13 +11,6 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
     end
 
-    def new
-        # new.html.erbで@postを使っているのに、controllerにないと、できなくなる。
-        # 要するに、一番最初に開いたときは、@postが無いので、erorが出る
-        @post = Post.new
-
-    end
-
     def edit # 編集画面というような感じ
         # 編集時には個々のデータがほしいので、showと同じように書ける
         @post = Post.find(params[:id])
@@ -72,7 +65,6 @@ class PostsController < ApplicationController
             @post.save
         ではエラーが出るようになる
         そこでstrong parameterを使う(下記参照)
-         
 =end
         # storong parameterを使用する
         @post = Post.new(post_params)
@@ -110,13 +102,5 @@ class PostsController < ApplicationController
 # 便利な関数
     def to_md5(str)
         Digest::MD5.hexdigest(str)
-    end
-
-    def check_pass(mobj,input_pass,correct_pass)
-        if input_pass == correct_pass
-            mobj = input_pass
-        else
-            mobj = nil
-        end
     end
 end

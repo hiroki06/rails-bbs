@@ -31,7 +31,7 @@ class PostsController < ApplicationController
         if params[:delete] 
             if input_pass == correct_pass
                 @post.destroy
-                redirect_to posts_path
+                redirect_to root_path
                 return
             else
                 # エラー表示するため、passwordを一度空にする
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
                  params[:post][:password] = nil
             end
             if @post.update(post_params)
-                redirect_to posts_path
+                redirect_to root_path
             else
                 render 'edit'
             end
@@ -59,7 +59,7 @@ class PostsController < ApplicationController
     #     @post = Post.find(params[:post][:id])
     #     @post.destroy
     #     # 削除された画面を反映させる
-    #     redirect_to posts_path
+    #     redirect_to root_path
     # end
     def create
         # test用
@@ -86,7 +86,7 @@ class PostsController < ApplicationController
         end
         if @post.save
         # redirect ここでは記事一覧にリダイレクトするprefixが使える
-            redirect_to posts_path
+            redirect_to root_path
         else
             # test用
             # render plain: @post.errors.inspect

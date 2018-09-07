@@ -25,21 +25,42 @@ class PostsController < ApplicationController
 
     def update
         @post = Post.find(params[:id])
-        # validateを掛ける
-        if @post.update(post_params)
-            redirect_to posts_path
+        input_pass = to_md5(params[:post][:password])
+        correct_pass = @post[:password]
+        # delete用
+        if params[:delete] 
+            if input_pass == correct_pass
+                @post.destroy
+                redirect_to posts_path
+                return
+            else
+                # エラー表示するため、passwordを一度空にする
+                params[:post][:password] = nil
+                @post.update(params.require(:post).permit(:password))
+                render 'edit'
+                return
+            end
+        #update用
         else
-            render 'edit'
+            if input_pass == correct_pass
+                 params[:post][:password] = input_pass
+            else
+                 params[:post][:password] = nil
+            end
+            if @post.update(post_params)
+                redirect_to posts_path
+            else
+                render 'edit'
+            end
         end
     end
 
-    def destroy
-        @post = Post.find(params[:id])
-        # if @post.id == params[:password]
-        @post.destroy
-        # 削除された画面を反映させる
-        redirect_to posts_path
-    end
+    # def destroy
+    #     @post = Post.find(params[:post][:id])
+    #     @post.destroy
+    #     # 削除された画面を反映させる
+    #     redirect_to posts_path
+    # end
     def create
         # test用
         # render plain: params[:post].inspect
@@ -60,7 +81,9 @@ class PostsController < ApplicationController
             @post.author = "名無しさん"
         end
         # hash化
-        @post[:password] = to_md5(@post[:password])
+        if !@post.password.empty?
+            @post.password = to_md5(@post.password)
+        end
         if @post.save
         # redirect ここでは記事一覧にリダイレクトするprefixが使える
             redirect_to posts_path
@@ -87,5 +110,13 @@ class PostsController < ApplicationController
 # 便利な関数
     def to_md5(str)
         Digest::MD5.hexdigest(str)
+    end
+
+    def check_pass(mobj,input_pass,correct_pass)
+        if input_pass == correct_pass
+            mobj = input_pass
+        else
+            mobj = nil
+        end
     end
 end

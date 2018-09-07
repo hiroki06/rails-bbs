@@ -1,9 +1,0 @@
-<%= button_to 'delete',
-    post_path(@post.id),
-    # deleteと明示的にするために必要
-    method: :delete,
-    class: 'command',
-    # 確認ダイアログ
-    data: {confirm: '削除しますか?'}
-
-%>

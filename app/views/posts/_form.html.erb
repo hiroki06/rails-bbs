@@ -47,6 +47,9 @@
     <p>
 
 <!-- submit -->
+    <% unless @post.id.nil? %>
+        <%= f.submit '削除', class: 'delete',name: "delete" %>
+    <% end %>
         <%= f.submit '作成', class: 'submit' %>
     </p>
 <% end %>

@@ -75,22 +75,29 @@ h3 {
     height:72px;
 }
 .submit {
+    font-family: 'Wawati SC',sans-serif;
+    text-shadow: 1px 1px 1px 1px;
     cursor: pointer;
     font-size: 50px;
     float:left;
+    text-shadow: 1px 1px 1px #000;
     margin-bottom: 10px;
     width:100%;
     height:100px;
-    background:#34FF48;
+    color: #eee;
+    background:#67BC6E;
     border-radius: 5px;
 }
 .delete {
+    font-family: 'Wawati SC',sans-serif;
+    text-shadow: 1px 1px 1px #000;
     cursor: pointer;
     float:left;
     font-size: 20px;
     width: 100%;
     height:30px;
-    background: #FC0006;
+    background: #8A4954;
+    color:white;
     border-radius: 5px;
 }
 .article {

@@ -8,5 +8,5 @@
 require "digest/md5"
 
 5.times do |i|
-    Post.create(title: "はじめまして#{i}です！",body: "趣味は#{i}つあります。", password:"#{Digest::MD5.hexdigest(i.to_s)}",author: "#{i}さん")
+    Post.create(title: "はじめまして#{i}です！",body: "趣味は#{i}つあります。", password:"#{Digest::SHA256.hexdigest(i.to_s)}",author: "#{i}さん")
 end

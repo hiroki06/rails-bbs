@@ -1,4 +1,4 @@
-require "digest/md5"
+require "digest/sha2"
 
 class PostsController < ApplicationController
     # actionのこと(rails routesででてくるgetしたときの関数)
@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
     def update
         @post = Post.find(params[:id])
-        input_pass = to_md5(params[:post][:password])
+        input_pass = to_sha2(params[:post][:password])
         correct_pass = @post[:password]
         # delete用
         if params[:delete] 
@@ -74,7 +74,7 @@ class PostsController < ApplicationController
         end
         # hash化
         if !@post.password.empty?
-            @post.password = to_md5(@post.password)
+            @post.password = to_sha2(@post.password)
         end
         if @post.save
         # redirect ここでは記事一覧にリダイレクトするprefixが使える
@@ -100,7 +100,7 @@ class PostsController < ApplicationController
         end
 
 # 便利な関数
-    def to_md5(str)
-        Digest::MD5.hexdigest(str)
+    def to_sha2(str)
+        Digest::SHA256.hexdigest(str)
     end
 end

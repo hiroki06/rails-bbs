@@ -2,6 +2,7 @@ require "digest/sha2"
 
 class PostsController < ApplicationController
     # actionのこと(rails routesででてくるgetしたときの関数)
+    protect_from_forgery except: :destroy
     def index
         @posts = Post.all.order(updated_at: 'desc')
         @post = Post.new
@@ -11,49 +12,44 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
     end
 
-    def edit # 編集画面というような感じ
+    def edit
         # 編集時には個々のデータがほしいので、showと同じように書ける
-        @post = Post.find(params[:id])
+            @post = Post.find(params[:id])
+
     end
 
     def update
         @post = Post.find(params[:id])
         input_pass = to_sha2(params[:post][:password])
         correct_pass = @post[:password]
-        # delete用
-        if params[:delete] 
-            if input_pass == correct_pass
-                @post.destroy
-                redirect_to root_path
-                return
-            else
-                # エラー表示するため、passwordを一度空にする
-                params[:post][:password] = nil
-                @post.update(params.require(:post).permit(:password))
-                render 'edit'
-                return
-            end
-        #update用
+        # errorを表示するためpasswordをnilにする
+        if params[:commit] && input_pass == correct_pass
+             params[:post][:password] = input_pass
         else
-            if input_pass == correct_pass
-                 params[:post][:password] = input_pass
-            else
-                 params[:post][:password] = nil
-            end
-            if @post.update(post_params)
-                redirect_to root_path
-            else
-                render 'edit'
-            end
+             params[:post][:password] = nil
+        end
+        if @post.update(post_params)
+            redirect_to root_path
+        else
+            render :edit
         end
     end
 
-    # def destroy
-    #     @post = Post.find(params[:post][:id])
-    #     @post.destroy
-    #     # 削除された画面を反映させる
-    #     redirect_to root_path
-    # end
+    def destroy
+        @post = Post.find(params[:id])
+        input_pass = to_sha2(params[:post][:password])
+        correct_pass = @post[:password]
+        if input_pass == correct_pass
+            @post.destroy
+            redirect_to root_path
+        else
+            # エラー表示するため、passwordを一度空にする
+            params[:post][:password] = nil
+            @post.update(params.require(:post).permit(:password))
+            render :edit
+        end
+    end
+
     def create
         # test用
         # render plain: params[:post].inspect

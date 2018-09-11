@@ -13,8 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+ // 分け方
+ // 全部に対するもの
+/* 共通 */
+$mainWidth: 440px;
 .container {
-    width: 440px;
+    width: $mainWidth;
     margin: 20px auto;
     padding: 0 40px 10px 40px;
 }
@@ -34,90 +39,80 @@ ul > li {
     list-style: none;
 }
 .logo {
-    color: #444;
-    margin-bottom: 12px;
-    font-family: 'HanziPen SC',sans-serif;
-    width: 440px;
+    width: $mainWidth;
     height: 120px;
-    float: right;
     background: url("../images/logo.png");
-    text-decoration: none;
-}
-.header-menu {
-    font-size: 12px;
-    font-weight: normal;
-    float: right;
+    margin-bottom: 12px;
 }
 
-input[type="text"],textarea, input[type="password"]{
+textarea,
+input[type="text"],
+input[type="password"] {
     box-sizing: border-box;
-    width: 440px;
+    width: $mainWidth;
     padding: 5px;
 }
 
 textarea{
     height:160px;
 }
+
 .error{
     font-size: 12px;
     font-weight: bold;
     color: tomato;
 }
+
+/* btn */
+.btn {
+    font-family: 'Wawati SC',sans-serif;
+    text-shadow: 1px 1px 1px #000;
+    cursor: pointer;
+    float:left;
+    width: 100%;
+    border-radius: 5px;
+}
+.submit {
+    @extend .btn;
+    font-size: 50px;
+    margin-bottom: 10px;
+    height:100px;
+    color: #eee;
+    background:#67BC6E;
+}
+.delete {
+    @extend .btn;
+    font-size: 20px;
+    height:30px;
+    background: #8A4954;
+    color:white;
+}
 .command {
     font-size: 12px;
     float:right;
 }
-h3 {
-    font-size: 14px;
-    /*padding-top: 25px;*/
-}
-.comment_body {
-    height:72px;
-}
-.submit {
-    font-family: 'Wawati SC',sans-serif;
-    text-shadow: 1px 1px 1px 1px;
-    cursor: pointer;
-    font-size: 50px;
-    float:left;
-    text-shadow: 1px 1px 1px #000;
-    margin-bottom: 10px;
-    width:100%;
-    height:100px;
-    color: #eee;
-    background:#67BC6E;
-    border-radius: 5px;
-}
-.delete {
-    font-family: 'Wawati SC',sans-serif;
-    text-shadow: 1px 1px 1px #000;
-    cursor: pointer;
-    float:left;
-    font-size: 20px;
-    width: 100%;
-    height:30px;
-    background: #8A4954;
-    color:white;
-    border-radius: 5px;
-}
+/* show */
 .article {
     background: rgb(239, 239, 239);
     border:solid 1px #ddd;
     padding: 8px;
+    p {
+        margin: 2px;
+    }
+    p:nth-of-type(3){
+        margin: 16px 10px 16px 10px;
+    }
+    p:nth-of-type(5){
+        text-align: right;
+    }
+    .author {
+        color: rgb(0, 128, 0);
+    }
+    .author > span{
+        float:right;
+        color: #000;
+    }
 }
-.author {
-    color: rgb(0, 128, 0);
-}
-.author > span{
-    float:right;
-    color: #000;
-}
-.article p {
-    margin: 2px;
-}
-.article p:nth-of-type(3){
-    margin: 16px 10px 16px 10px;
-}
-.article p:nth-of-type(5){
-    text-align: right;
+.comment_body {
+    height:72px;
 }

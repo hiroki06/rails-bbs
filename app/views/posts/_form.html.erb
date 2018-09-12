@@ -9,54 +9,46 @@
         おそらく、モデルが増えてくるとたくさん記述する必要が出てくる -->
 <!-- どっちも対応の場合 -->
 <%= form_for @post do |f| %>
-<!-- 記事入力 -->
-
-    <p>
-        <span>名前</span>
-        <%= f.text_field :author, placeholder: '省略可' %>
-    </p>
-    <% if @post.errors.messages[:author].any? %>
-        <span class="error"><%= @post.errors.messages[:author][0] %></span>
-    <% end %>
-    <p>
 
 <!-- title入力 -->
     <!-- @postは新規追加のデータが入っている -->
     <!-- つまりrender plain @post.errors.inspectで出たやつ -->
     <!-- any?: モデルが空ならtrueを返す -->
     
-    <p>
-        <span>タイトル</span>
-        <%= f.text_field :title, placeholder: '3文字以上' %>
-    </p>
+    <div class="form-group">
+        <label>タイトル</label>
+        <%= f.text_field :title, class: 'form-control', placeholder: '3文字以上' %>
+    </div>
     <% if @post.errors.messages[:title].any? %>
         <span class="error"><%= @post.errors.messages[:title][0] %></span>
     <% end %>
-
+    <div class="form-group">
+<!-- 入力 -->
+    <span>名前</span>
+        <%= f.text_field :author, class: 'form-control', placeholder: '省略可' %>
+    </div>
+    <% if @post.errors.messages[:author].any? %>
+        <span class="error"><%= @post.errors.messages[:author][0] %></span>
+    <% end %>
 <!-- 記事入力 -->
-    <p>
-        <span>内容</span>
-        <%= f.text_area :body, placeholder: '内容欄' %>
-    </p>
+    <div class="form-group">
+        <label>内容</label>
+        <%= f.text_area :body, class: 'form-control', placeholder: '内容欄' %>
+    </div>
     <% if @post.errors.messages[:body].any? %>
         <span class="error"><%= @post.errors.messages[:body][0] %></span>
     <% end %>
-    <p>
 <!-- パスワード入力 -->
-    <p>
-        <span>パスワード</span>
-        <%= f.password_field :password, placeholder: 'パスワード欄' %>
-    </p>
+    <div class="form-group">
+        <label>パスワード</label>
+        <%= f.password_field :password, class: 'form-control', placeholder: 'パスワード欄' %>
+    </div>
     <% if @post.errors.messages[:password].any? %>
         <span class="error"><%= @post.errors.messages[:password][0] %></span>
     <% end %>
-    <p>
-
 <!-- submit -->
-        <%= f.submit '作成', class: 'submit' %>
+    <%= f.submit '作成', class: 'btn btn-block btn-success' %>
     <% unless @post.id.nil? %>
-        <%= f.submit '削除', class: 'delete',name: "delete",data: { confirm: "本当に削除しますか？"} %>
+        <%= f.submit '削除', class: 'btn btn-block btn-warning',name: "delete",data: { confirm: "本当に削除しますか？"} %>
     <% end %>
- 
-    </p>
 <% end %>

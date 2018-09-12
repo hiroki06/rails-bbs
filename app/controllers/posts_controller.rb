@@ -4,7 +4,8 @@ class PostsController < ApplicationController
     # actionのこと(rails routesででてくるgetしたときの関数)
     protect_from_forgery except: :destroy
     def index
-        @posts = Post.all.order(updated_at: 'desc')
+        # @posts = Post.all.order(updated_at: 'desc')
+        @posts = Post.page(params[:page])
         @post = Post.new
     end
 

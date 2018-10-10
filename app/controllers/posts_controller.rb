@@ -23,6 +23,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         input_pass = to_sha2(params[:post][:password])
         correct_pass = @post[:password]
+        binding.pry
         # errorを表示するためpasswordをnilにする
         if params[:commit] && input_pass == correct_pass
              params[:post][:password] = input_pass
@@ -38,9 +39,7 @@ class PostsController < ApplicationController
 
     def destroy
         @post = Post.find(params[:id])
-        input_pass = to_sha2(params[:post][:password])
-        correct_pass = @post[:password]
-        if input_pass == correct_pass
+        if @post[:password] == to_sha2(params[:post][:password])
             @post.destroy
             redirect_to root_path
         else

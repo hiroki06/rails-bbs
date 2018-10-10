@@ -4,19 +4,13 @@ RSpec.describe User, type: :model do
   describe "name attribute" do
 
     it "is valid user" do
-      user = User.new(
-      name: "tester",
-        password: "password"
-      )
+      user = FactoryBot.build(:user)
       expect(user).to be_valid
     end
   # name
     # presence
     it "is valid if no name" do
-      user = User.new(
-        name: "",
-        password: "password",
-      )
+      user = FactoryBot.build(:user, name: "")
       expect(user).to_not be_valid
     end
     it "is invalid without name" do
@@ -26,22 +20,22 @@ RSpec.describe User, type: :model do
     end
     # uniqness
     it "is unique  name" do
-      user_1 = User.create(name: "a",password: "password")
-      user_2 = User.new(name: "a",password: "password2")
+      user_1 = FactoryBot.create(:user)
+      user_2 = FactoryBot.build(:user,name: user_1.name)
       user_2.valid?
       expect(user_2.errors[:name]).to include("has already been taken")	
     end
     # length
     it "name is valid 15 length" do
-      user = User.new(name: "123456789012345",password: "password")
+      user = FactoryBot.build(:user, name: "123456789012345") 
       expect(user).to be_valid
     end
     it "is valid maximum 16 length" do
-    user = User.new(name: "1234567890123456",password: "password")
+      user = FactoryBot.build(:user, name: "1234567890123456")
       expect(user).to be_valid
     end
     it "is invalid more than 17 length" do
-      user = User.new(name: "12345678901234567",password: "password")
+      user = FactoryBot.build(:user, name: "12345678901234567")
       user.valid?
       expect(user.errors[:name]).to include("is too long (maximum is 16 characters)")
     end

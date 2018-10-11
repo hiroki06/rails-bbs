@@ -5,7 +5,7 @@ class PostsController < ApplicationController
     protect_from_forgery except: :destroy
     def index
         # @posts = Post.all.order(updated_at: 'desc')
-        @posts = Post.page(params[:page])
+        @posts = Post.page(params[:page]).order('updated_at DESC')
         @post = Post.new
     end
 

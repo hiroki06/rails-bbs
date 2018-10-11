@@ -80,7 +80,7 @@ class PostsController < ApplicationController
             # render plain: @post.errors.inspect
 
             # newと同じviewに表示する
-            @posts = Post.all.order(updated_at: 'desc')
+            @posts = Post.page(params[:page]).order(updated_at: 'desc')
             render 'index'
         end
     end

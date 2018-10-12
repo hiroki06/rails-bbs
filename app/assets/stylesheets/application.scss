@@ -19,10 +19,26 @@
 /* 共通 */
 @import "bootstrap";
 $mainWidth: 100%;
+$fennel-light: #F7F6EB;
+$fennel-regular: #7F9655;
+$fennel-dark: #485B30;
 .container {
     width: $mainWidth;
     margin: 1.2rem auto;
     padding: 0 3rem 0.6rem 3rem;
+}
+@include media-breakpoint-down(sm) {
+    .container {
+        width: 100%;
+        padding: 0.5rem;
+    }
+
+  }
+@include media-breakpoint-up(sm) {
+    .login-wrapper {
+        width: 480px;
+        padding: 0.5rem;
+    }
 }
 body {
     font-family: Verdana,sans-serif;
@@ -30,30 +46,15 @@ body {
     background: #F2F3F7;
 }
 h2 {
-    font-size: 1.7rem;
-    position: relative;
-    padding-top: 10px;
-    padding-left: 25px;
+    font-family: "游ゴシック体", "Yu Gothic", YuGothic, "ヒラギノ角ゴ Pro", "meiryo";
+    border-bottom: solid 1px #aaa;
+    border-radius: 1px;
+    text-shadow: 1px 1px 3px #aaa;
+    font-size: 1.5rem;
+    vertical-align: middle;
+    padding-top: 4px;
+    padding-bottom: 4px;
 
-    &:before {
-        position: absolute;
-        content: '';
-        bottom: -3px;
-        left: 0;
-        width: 0;
-        height: 0;
-        border: none;
-        border-left: solid 15px transparent;
-        border-bottom: solid 15px  rgb(0, 128, 0);
-}
-    &:after {
-        position: absolute;
-        content: '';
-        bottom: -3px;
-        left: 10px;
-        width: 100%;
-        border-bottom: solid 3px  rgb(0, 128, 0);
-    }
 }
 h3{
     margin-top: 1rem;
@@ -67,8 +68,8 @@ h3{
     margin-bottom: 12px;
 }
 /* textarea */
-textarea {
-    height: 5rem;
+#post_body {
+    height: 10rem;
 }
 /* show */
 .article {
@@ -76,16 +77,74 @@ textarea {
     border:solid 1px #ddd;
     padding: 0.5rem;
     p {
+        vertical-align: bottom;
         margin: 2px;
     }
     .author {
         color: rgb(0, 128, 0);
     }
-    .author > span{
+   .date {
         float:right;
         color: #000;
-    }
-    .date {
         font-size: 0.8em;
     }
+}
+.text-green {
+    color: rgb(0, 128, 0);
+}
+
+// login
+.login-wrapper {
+    padding: 1.5rem;
+    color: $fennel-light;
+    background: $fennel-regular;
+}
+.btn-login {
+    color: $fennel-regular;
+    background: $fennel-light;
+    opacity: 0.8;
+}
+
+// bgcolor, btncolor
+.btn-login:hover {
+    opacity: 0.6;
+}
+.bg-fennel-light {
+    background: $fennel-light;
+}
+.bg-fennel-regular {
+    opacity: 0.8;
+    color: $fennel-light;
+    background: $fennel-regular;
+}
+
+.bg-fennel-dark {
+    color: $fennel-light;
+    background: $fennel-dark;
+}
+.btn-fennel-light {
+    background: $fennel-light;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.btn-fennel-regular {
+    color: $fennel-light;
+    background: $fennel-regular;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.btn-fennel-dark {
+    color: $fennel-light;
+    background: $fennel-dark;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
+// over rided
+.btn-warning {
+    color: $fennel-light;
+    background: rgba(172, 127, 28, 0.633);
 }

@@ -8,6 +8,7 @@
     <!-- form_forとform_withがある :postはモデルオブジェクトのこと。つまりpostモデルに対するformだと言う意味
         おそらく、モデルが増えてくるとたくさん記述する必要が出てくる -->
 <!-- どっちも対応の場合 -->
+<div class="border-white rounded">
 <%= form_for @post do |f| %>
 
 <!-- title入力 -->
@@ -33,7 +34,7 @@
 <!-- 記事入力 -->
     <div class="form-group">
         <label>内容</label>
-        <%= f.text_area :body, class: 'form-control', placeholder: '内容欄' %>
+        <%= f.text_area :body, class: 'form-control textarea-content', placeholder: '内容欄'  %>
     </div>
     <% if @post.errors.messages[:body].any? %>
         <span class="error"><%= @post.errors.messages[:body][0] %></span>
@@ -47,8 +48,9 @@
         <span class="error"><%= @post.errors.messages[:password][0] %></span>
     <% end %>
 <!-- submit -->
-    <%= f.submit '作成', class: 'btn btn-block btn-success' %>
+    <%= f.submit '作成', class: 'btn btn-block btn-fennel-regular' %>
     <% unless @post.id.nil? %>
         <%= f.submit '削除', class: 'btn btn-block btn-warning',name: "delete",data: { confirm: "本当に削除しますか？"} %>
     <% end %>
 <% end %>
+</div>

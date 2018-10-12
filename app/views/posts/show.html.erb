@@ -1,15 +1,17 @@
-<h2>トピック</h2>
-<h3><%= @post.title %></h3>
+
 <!-- simple_formatで改行を反映させる -->
 <div class="article">
-    <p class="author">作者: <%= @post.author %> <span class="date">投稿日: <%= @post.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></span></p>
-    <%= simple_format @post.body, :class => 'p-3' %>
-    <p class="date">
-        最終更新日: <%= @post.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %>
+    <p>
+        <span class="title-md text-green"><%= @post.title %></span>
+        <span class="date">投稿日: <%= @post.created_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></span>
+        <%= simple_format @post.body, :class => 'p-3' %>
+    <p>
+        <span class="author">作者: <%= @post.author %></span>
+        <span class="date">最終更新日: <%= @post.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M') %></span>
     </p>
 </div>
 <!--comment欄  -->
-<h2>コメント欄</h2>
+<h3 class="title-md text-green">コメント欄</h3>
 <% if @post.comments.any? %>
     <% @post.comments.each_with_index do |comment,i| %>
     <div class="article mt-2">
@@ -27,6 +29,6 @@
     </p>
 <!-- submit -->
     <div class="form-group">
-        <%= f.submit 'コメント投稿',class: 'btn btn-block btn-success' %>
+        <%= f.submit 'コメント投稿',class: 'btn btn-block btn-fennel-regular' %>
     </p>
 <% end %>
